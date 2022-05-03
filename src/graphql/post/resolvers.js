@@ -1,25 +1,12 @@
-const post = () => {
-    return {
-        id: '1',
-        title: "Another one post",
-    }
+const post = async (_, { id }, { getPosts }) => {
+
+    const fetchPost = await getPosts(`/${id}`);
+    return fetchPost.json();
 }
 
-const posts = () => {
-    return [
-        {
-            id: '1',
-            title :'Post 1'
-        },
-        {
-            id: '2',
-            title :'Post 2'
-        },
-        {
-            id: '2',
-            title :'Post 3'
-        }
-    ]
+const posts = async (_, __, { getPosts }) => {
+    const fetchPosts = await getPosts();
+    return fetchPosts.json();
 }
 
 export const postResolver = {
