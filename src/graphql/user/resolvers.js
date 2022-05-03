@@ -1,34 +1,19 @@
-const user = () => {
-    return {
-        id: '1',
-        userName: "rbrickes",
-        password: 'rB123456'
-    }
+
+
+const user = async (_, { id }, { getUsers }) => {
+    const fetchUser = await getUsers(`/${id}`);
+    return fetchUser.json();
 }
 
-const users = () => {
-    return [
-        {
-            id: '1',
-            userName: "rbrickes",
-            password: 'rB123456'
-        },
-        {
-            id: '2',
-            userName: "gvalerio",
-            password: 'gV123456'
-        },
-        {
-            id: '1',
-            userName: "rrodrigues",
-            password: 'rR123456'
-        }
-    ]
+
+const users = async (_, __, { getUsers }) => {
+    const fetchUsers = await getUsers();
+    return fetchUsers.json();
 }
 
 export const userResolver = {
     Query: {
         user,
-        users,
+        users
     }
 }

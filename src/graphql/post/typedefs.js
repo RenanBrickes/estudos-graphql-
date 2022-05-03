@@ -8,6 +8,8 @@ extend type Query {
        type Post {
             id : ID,
             title : String!,
+            body : String!,
+            indexRef : Int!,
+            createdAt : String!
        } 
 `;
-
