@@ -15,5 +15,12 @@ export const userResolver = {
     Query: {
         user,
         users
+    },
+    User: {
+        createFormat : ({ createdAt }) => {
+            const date = new Date(createdAt);
+            return date.toLocaleString('pt-BR')
+        }
     }
+
 }

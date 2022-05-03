@@ -11,7 +11,8 @@ extend type Query {
             lastName : String!,
             userName : String!,
             indexRef : Int!,
-            createdAt : String!
+            createdAt : String!,
+            createFormat: String!
        } 
 `;
 
