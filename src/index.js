@@ -1,14 +1,19 @@
-import { ApolloServer, gql } from 'apollo-server';
-import { resolvers, typeDefs } from './graphql/schema';
-import fetch from "node-fetch";
+import { ApolloServer } from 'apollo-server';
 import { context } from './graphql/context';
+import { PostsApi } from './graphql/post/datasources';
+import { resolvers, typeDefs } from './graphql/schema';
 
 const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    context
+  typeDefs,
+  resolvers,
+  context,
+  dataSources: () => {
+    return {
+      postApi: new PostsApi(),
+    };
+  },
 });
 
 server.listen(4003).then(({ url }) => {
-    console.log(`Appolo nessa porta ${url}`)
+  console.log(`Server listening on url ${url}`);
 });
