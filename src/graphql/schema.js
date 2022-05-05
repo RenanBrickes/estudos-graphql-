@@ -1,20 +1,26 @@
-import { gql } from "apollo-server";
-import { postResolver } from "./post/resolvers";
-import { postTypeDefes } from "./post/typedefs";
-import { userResolver } from "./user/resolvers";
-import { userTypeDefes } from "./user/typedefs";
+import { gql } from 'apollo-server-core';
+import { apiFiltersTypeDefs } from './api-filters/typedefs';
+import { postResolvers } from './post/resolvers';
+import { postTypeDefs } from './post/typedefs';
+import { userResolvers } from './user/resolvers';
+import { userTypeDefs } from './user/typedefs';
 
-const rootTypeDefes = gql`
-type Query {
-            hi : String
-        }
+const rootTypeDefs = gql`
+  type Query {
+    _empty: Boolean
+  }
 `;
 
-const rootResorvers = {
-    Query : {
-        hi : () => "Hellow"
-    }
-}
+const rootResolvers = {
+  Query: {
+    _empty: () => true,
+  },
+};
 
-export const typeDefs = [rootTypeDefes, userTypeDefes, postTypeDefes];
-export const resolvers = [rootResorvers, userResolver, postResolver];
+export const typeDefs = [
+  rootTypeDefs,
+  userTypeDefs,
+  postTypeDefs,
+  apiFiltersTypeDefs,
+];
+export const resolvers = [rootResolvers, userResolvers, postResolvers];

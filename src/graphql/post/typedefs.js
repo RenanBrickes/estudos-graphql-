@@ -1,15 +1,18 @@
-import { gql } from "apollo-server";
+import { gql } from 'apollo-server-core';
 
-export const postTypeDefes = gql`
-extend type Query {
-            post(id: ID): Post!,
-            posts: [Post]
-        }
-       type Post {
-            id : ID,
-            title : String!,
-            body : String!,
-            indexRef : Int!,
-            createdAt : String!
-       } 
+export const postTypeDefs = gql`
+  extend type Query {
+    post(id: ID!): Post!
+    posts(input: ApiFiltersInput): [Post!]!
+  }
+
+  type Post {
+    id: ID!
+    title: String!
+    body: String!
+    # user: User!
+    indexRef: Int!
+    createdAt: String!
+    unixTimestamp: String!
+  }
 `;
