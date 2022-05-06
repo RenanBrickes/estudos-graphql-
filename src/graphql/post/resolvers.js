@@ -12,7 +12,12 @@ const user = async ({ userId }, _, { dataSources }) => {
   return dataSources.userApi.batchLoadById(userId);
 };
 
+const createPost = async (_, { data }, { dataSources }) => {
+  return dataSources.postApi.createPost(data)
+}
+
 export const postResolvers = {
   Query: { post, posts },
   Post: { user },
+  Mutation: { createPost }
 };
