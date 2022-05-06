@@ -10,6 +10,15 @@ export const createPostFn = async (postData, dataSources) => {
     return await dataSources.post('', { ...postInfo });
 }
 
+
+export const deletePostFn = async (postId, dataSources) => {
+
+    if(!postId)
+        throw new ValidationError("O id do post é obrigátorio.");
+    const deleted = await dataSources.delete(postId);
+    return !!deleted;   
+}
+
 export const updatePostFn = async (postId, postData, dataSources) => {
 
     if (!postId)
