@@ -6,6 +6,12 @@ export const userTypeDefs = gql`
     users(input: ApiFiltersInput): [User!]!
   }
 
+  extend type Mutation {
+    createUser(data: InputUserCreate): Boolean
+    editUser(userId: ID! data: inputUserEdit): Boolean
+    deleteUser(userId: ID!): Boolean
+  }
+
   type User {
     id: ID!
     firstName: String!
@@ -14,5 +20,16 @@ export const userTypeDefs = gql`
     indexRef: Int!
     createdAt: String!
     posts: [Post!]!
+  }
+
+  input InputUserCreate {
+    firstName: String!
+    lastName: String!
+    userName: String!    
+  }
+  input inputUserEdit {
+    firstName: String
+    lastName: String
+    userName: String
   }
 `;
