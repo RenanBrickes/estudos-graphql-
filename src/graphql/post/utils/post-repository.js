@@ -7,7 +7,32 @@ export const createPostFn = async (postData, dataSources) => {
     if (!title || !body || !userId)
         throw new ValidationError(`Você precisa enviar os dados correto`);
 
-    return await dataSources.post('', {... postInfo});
+    return await dataSources.post('', { ...postInfo });
+}
+
+export const updatePostFn = async (postId, postData, dataSources) => {
+
+    if (!postId)
+        throw new ValidationError(`Você precisa informar o id do post`);
+
+    const { title, body, userId } = postData;
+
+    if (typeof title !== 'undefined') {
+        if (!title)
+            throw new ValidationError(`Title é obrigatorio`);
+    }
+    if (typeof body !== 'undefined') {
+        if (!body)
+            throw new ValidationError(`Body é obrigatorio`);
+    }
+
+    if (typeof userId !== 'undefined') {
+        if (!userId)
+            throw new ValidationError(`User é obrigatorio`);
+        await userExists(userId, dataSources);
+    }
+
+    return await dataSources.patch(postId, { ...postData });
 }
 
 const userExists = async (userId, dataSources) => {

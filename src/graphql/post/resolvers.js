@@ -16,8 +16,12 @@ const createPost = async (_, { data }, { dataSources }) => {
   return dataSources.postApi.createPost(data)
 }
 
+const updatePost = async(_, {postId, data}, {dataSources}) => {
+  return dataSources.postApi.updatePost(postId, data);
+}
+
 export const postResolvers = {
   Query: { post, posts },
   Post: { user },
-  Mutation: { createPost }
+  Mutation: { createPost, updatePost }
 };
